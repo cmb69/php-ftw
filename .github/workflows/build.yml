@@ -1,0 +1,36 @@
+name: Build PHP
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'PHP version to build'
+        required: true
+defaults:
+  run:
+    shell: cmd
+jobs:
+  build:
+    strategy:
+      matrix:
+        arch: [x64, x86]
+        ts: [nts, ts]
+    runs-on: windows-2019
+    steps:
+      - name: Checkout php-ftw
+        uses: actions/checkout@v2
+      - name: Checkout php-sdk
+        uses: actions/checkout@v2
+        with:
+          repository: 'cmb69/php-sdk-binary-tools'
+          path: 'php-sdk'
+      - name: Install OCI
+        run: powershell .github/workflows/install-oci.ps1 -arch ${{matrix.arch}}
+      - name: Fetch php-src
+        run: powershell .github/workflows/fetch-php-src.ps1 -version ${{github.event.inputs.version}} -arch ${{matrix.arch}}
+      - name: Build php
+        run: powershell .github/workflows/build.ps1 -version ${{github.event.inputs.version}} -arch ${{matrix.arch}} -ts ${{matrix.ts}}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: php-${{github.event.inputs.version}}-${{matrix.arch}}-${{matrix.ts}}-artifacts
+          path: artifacts
