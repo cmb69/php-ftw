@@ -6,7 +6,7 @@ param (
 
 $ErrorActionPreference = "Stop"
 
-Set-Location "php\vs16\$arch\php-8.0.7"
+Set-Location "php\vs16\$arch\php-$version"
 
 New-Item "..\obj" -ItemType "directory"
 Copy-Item "..\config.$ts.bat"
