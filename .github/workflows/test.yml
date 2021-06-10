@@ -1,0 +1,14 @@
+name: Build PHP
+on: [push]
+defaults:
+  run:
+    shell: cmd
+jobs:
+  build:
+    strategy:
+      matrix:
+        arch: [x64]
+        ts: [nts]
+    runs-on: windows-2019
+    steps:
+      - run: dir
