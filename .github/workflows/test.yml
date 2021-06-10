@@ -11,4 +11,5 @@ jobs:
         ts: [nts]
     runs-on: windows-2019
     steps:
-      - run: dir
+      - run: powershell .github/workflows/fetch-php.ps1 -version 8.0.7 -arch x64 -ts nts
+      - run: tree /a .
