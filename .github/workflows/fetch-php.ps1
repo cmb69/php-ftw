@@ -6,6 +6,12 @@ param (
 
 $ErrorActionPreference = "Stop"
 
-$url = "https://windows.php.net/downloads/releases/php-8.0.7-Win32-vs16-x64.zip"
-Invoke-WebRequest $url -OutFile "php-8.0.7-Win32-vs16-x64.zip"
-7z "x" "php-8.0.7-Win32-vs16-x64.zip" -ophpbin
+$fname = "php-8.0.7-nts-Win32-vs16-x64.zip"
+$url = "https://windows.php.net/downloads/releases/$fname"
+Invoke-WebRequest $url -OutFile $fname
+7z "x" $fname "-ophpbin"
+
+$fname = "php-test-pack-8.0.7.zip"
+$url = "https://windows.php.net/downloads/releases/$fname"
+Invoke-WebRequest $url -OutFile $fname
+7z "x" $fname "-otests"
