@@ -15,3 +15,8 @@ jobs:
         uses: actions/checkout@v2
       - run: powershell .github/workflows/fetch-php.ps1 -version 8.0.7 -arch x64 -ts nts
       - run: powershell .github/workflows/run-tests.ps1
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results.xml
+          path: tests-results.xml
