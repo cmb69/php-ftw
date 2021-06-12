@@ -12,8 +12,6 @@ jobs:
         opcache: [0]
     runs-on: windows-2019
     steps:
-      - run: set NUMBER_OF_PROCESSORS
-      - run: set OPENSSL_CONF
       - name: Checkout php-ftw
         uses: actions/checkout@v2
       - name: Setup MySQL
