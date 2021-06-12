@@ -13,7 +13,7 @@ jobs:
     runs-on: windows-2019
     steps:
       - run: |
-          dir C:
+          dir "C:\Program Files (x86)"
           exit 123
       - name: Checkout php-ftw
         uses: actions/checkout@v2
