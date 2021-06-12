@@ -1,3 +1,5 @@
+Sapi\cgi\tests
+Sapi\cli\tests
 Zend\tests
 tests
 ext\curl
