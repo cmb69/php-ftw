@@ -6,7 +6,7 @@ $Env:TEST_PHP_JUNIT = "$pwd\tests-results.xml"
 
 Set-Location "tests"
 
-Remove-Item "tests-to-run.txt"
+Remove-Item "tests-to-run.txt" -ErrorAction "Ignore"
 foreach ($line in Get-Content "..\dirs-to-test.txt") {
     $ttr = Get-ChildItem -Path $line -Filter "*.phpt" -Recurse
     foreach ($t in $ttr) {
