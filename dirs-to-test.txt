@@ -1,2 +1,10 @@
 Zend\tests
 tests
+ext\curl
+ext\com_dotnet\tests
+ext\date\tests
+ext\dom\tests
+ext\hash\tests
+ext\intl\tests
+ext\json\tests
+ext\libxml\tests
