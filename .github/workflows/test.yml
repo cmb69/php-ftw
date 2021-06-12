@@ -9,7 +9,6 @@ jobs:
       matrix:
         arch: [x64]
         ts: [ts]
-        opcache: [0]
     runs-on: windows-2019
     steps:
       - name: Checkout php-ftw
@@ -21,9 +20,9 @@ jobs:
       - name: Fetch PHP
         run: powershell .github/workflows/fetch-php.ps1 -version 8.0.7RC1 -arch ${{matrix.arch}} -ts ${{matrix.ts}}
       - name: Run tests
-        run: powershell .github/workflows/run-tests.ps1 -arch ${{matrix.arch}} -opcache ${{matrix.opcache}}
+        run: powershell .github/workflows/run-tests.ps1 -arch ${{matrix.arch}}
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: test-results.xml
-          path: tests-results.xml
+          name: test-results
+          path: tests-results*.xml
