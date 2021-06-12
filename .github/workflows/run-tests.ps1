@@ -1,31 +1,36 @@
+param (
+    [Parameter(Mandatory)] $arch,
+    [Parameter(Mandatory)] $opcache
+)
+
 $ErrorActionPreference = "Stop"
 
 $ini = "$pwd\phpbin\php.ini"
 Copy-Item "php.ini" $ini
 Add-Content $ini "extension_dir=$pwd\phpbin\ext"
 
-New-Item "$pwd/file_cache" -ItemType "directory"
-
-# x64
-# Add-Content $ini "opcache.memory_consumption=256"
-# Add-Content $ini "opcache.interned_strings_buffer=16"
-# Add-Content $ini "opcache.max_accelerated_files=8000"
-# Add-Content $ini "opcache.jit_buffer_size=32M"
-
-# x86
-Add-Content $ini "opcache.memory_consumption=128"
-Add-Content $ini "opcache.interned_strings_buffer=8"
-Add-Content $ini "opcache.max_accelerated_files=4000"
-Add-Content $ini "opcache.jit_buffer_size=16M"
-
-Add-Content $ini "opcache.revalidate_freq=60"
-Add-Content $ini "opcache.fast_shutdown=1"
-Add-Content $ini "opcache.enable=1"
-Add-Content $ini "opcache.enable_cli=1"
-Add-Content $ini "opcache.error_log=$pwd/opcache_error.log"
-Add-Content $ini "opcache.log_verbosity_level=2"
-Add-Content $ini "opcache.file_cache=$pwd/file_cache"
-Add-Content $ini "opcache.file_cache_fallback=1"
+if ($opcache) {
+    New-Item "$pwd/file_cache" -ItemType "directory"
+    if ($arch -eq "x64") {
+        Add-Content $ini "opcache.memory_consumption=256"
+        Add-Content $ini "opcache.interned_strings_buffer=16"
+        Add-Content $ini "opcache.max_accelerated_files=8000"
+        Add-Content $ini "opcache.jit_buffer_size=32M"
+    } else {
+        Add-Content $ini "opcache.memory_consumption=128"
+        Add-Content $ini "opcache.interned_strings_buffer=8"
+        Add-Content $ini "opcache.max_accelerated_files=4000"
+        Add-Content $ini "opcache.jit_buffer_size=16M"
+    }
+    Add-Content $ini "opcache.revalidate_freq=60"
+    Add-Content $ini "opcache.fast_shutdown=1"
+    Add-Content $ini "opcache.enable=1"
+    Add-Content $ini "opcache.enable_cli=1"
+    Add-Content $ini "opcache.error_log=$pwd/opcache_error.log"
+    Add-Content $ini "opcache.log_verbosity_level=2"
+    Add-Content $ini "opcache.file_cache=$pwd/file_cache"
+    Add-Content $ini "opcache.file_cache_fallback=1"
+}
 
 $Env:Path = "$pwd\phpbin;$Env:Path"
 $Env:TEST_PHP_EXECUTABLE = "$pwd\phpbin\php.exe"
