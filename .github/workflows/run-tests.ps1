@@ -55,6 +55,6 @@ foreach ($line in Get-Content "..\dirs-to-test.txt") {
     }
 }
 
-[int] $workers = $Env:NUMBER_OF_PROCESSORS / 3 * 2
+[int] $workers = $Env:NUMBER_OF_PROCESSORS / 2 * 3
 
 php "run-tests.php" "-j$workers" "-g" "FAIL,BORK,WARN,LEAK" "--context" "0" "-r" "tests-to-run.txt"
