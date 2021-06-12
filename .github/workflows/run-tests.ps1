@@ -41,6 +41,10 @@ $Env:MYSQL_TEST_USER = "root"
 $Env:MYSQL_TEST_PASSWD = ""
 $Env:MYSQL_TEST_DB = "test"
 
+$Env:PDO_MYSQL_TEST_DSN = "mysql:host=localhost;dbname=test"
+$Env:PDO_MYSQL_TEST_USER = "root"
+$Env:PDO_MYSQL_TEST_PASS = ""
+
 Set-Location "tests"
 
 Remove-Item "tests-to-run.txt" -ErrorAction "Ignore"

@@ -10,6 +10,7 @@ ext\mbstring\tests
 ext\mysqli\tests
 ext\openssl\tests
 ext\pcre\tests
+ext\pdo_mysql\tests
 ext\pdo_sqlite\tests
 ext\phar\tests
 ext\reflection\tests
