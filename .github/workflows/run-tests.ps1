@@ -3,8 +3,6 @@ $ErrorActionPreference = "Stop"
 Copy-Item "php.ini" "$pwd\phpbin\php.ini"
 Add-Content "$pwd\phpbin\php.ini" "extension_dir=$pwd\phpbin\ext"
 
-php -m
-
 $Env:Path = "$pwd\phpbin;$Env:Path"
 $Env:TEST_PHP_EXECUTABLE = "$pwd\phpbin\php.exe"
 $Env:TEST_PHP_JUNIT = "$pwd\tests-results.xml"
