@@ -38,9 +38,8 @@ $Env:TEST_PHP_JUNIT = "$pwd\tests-results.xml"
 
 $env:MYSQL_TEST_PORT = "3306"
 $Env:MYSQL_TEST_USER = "root"
-$Env:MYSQL_TEST_PASSWD = "root"
+$Env:MYSQL_TEST_PASSWD = ""
 $Env:MYSQL_TEST_DB = "test"
-mysql "--user=$Env:MYSQL_TEST_USER" "--password=$Env:MYSQL_TEST_PASSWD" "-e" "CREATE DATABASE test"
 
 Set-Location "tests"
 

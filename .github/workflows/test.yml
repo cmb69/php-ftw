@@ -14,6 +14,10 @@ jobs:
     steps:
       - name: Checkout php-ftw
         uses: actions/checkout@v2
+      - name: Setup MySQL
+        uses: ankane/setup-mysql@v1
+        with:
+          database: test
       - name: Fetch PHP
         run: powershell .github/workflows/fetch-php.ps1 -version 8.0.7RC1 -arch ${{matrix.arch}} -ts ${{matrix.ts}}
       - name: Run tests
