@@ -36,6 +36,8 @@ $Env:Path = "$pwd\phpbin;$Env:Path"
 $Env:TEST_PHP_EXECUTABLE = "$pwd\phpbin\php.exe"
 $Env:TEST_PHP_JUNIT = "$pwd\tests-results.xml"
 
+$Env:OPENSSL_CONF = ""
+
 $env:MYSQL_TEST_PORT = "3306"
 $Env:MYSQL_TEST_USER = "root"
 $Env:MYSQL_TEST_PASSWD = ""
