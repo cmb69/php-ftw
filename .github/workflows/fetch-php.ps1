@@ -6,7 +6,7 @@ param (
 
 $ErrorActionPreference = "Stop"
 
-$what = if ($version -match "[a-z]") {"releases"} else {"qa"}
+$what = if ($version -match "[a-z]") {"qa"} else {"releases"}
 $baseurl = "https://windows.php.net/downloads/$what"
 $tspart = if ($ts -eq "nts") {"nts-Win32"} else {"Win32"}
 
