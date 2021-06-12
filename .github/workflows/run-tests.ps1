@@ -1,7 +1,24 @@
 $ErrorActionPreference = "Stop"
 
-Copy-Item "php.ini" "$pwd\phpbin\php.ini"
-Add-Content "$pwd\phpbin\php.ini" "extension_dir=$pwd\phpbin\ext"
+$ini = "$pwd\phpbin\php.ini"
+Copy-Item "php.ini" $ini
+Add-Content $ini "extension_dir=$pwd\phpbin\ext"
+
+New-Item "$pwd/file_cache" -ItemType "directory"
+
+# x64
+Add-Content $ini "opcache.memory_consumption=256"
+Add-Content $ini "opcache.interned_strings_buffer=16"
+Add-Content $ini "opcache.max_accelerated_files=8000"
+Add-Content $ini "opcache.jit_buffer_size=32M"
+Add-Content $ini "opcache.revalidate_freq=60"
+Add-Content $ini "opcache.fast_shutdown=1"
+Add-Content $ini "opcache.enable=1"
+Add-Content $ini "opcache.enable_cli=1"
+Add-Content $ini "opcache.error_log=$pwd/opcache_error.log"
+Add-Content $ini "opcache.log_verbosity_level=2"
+Add-Content $ini "opcache.file_cache=$pwd/file_cache"
+Add-Content $ini "opcache.file_cache_fallback=1"
 
 $Env:Path = "$pwd\phpbin;$Env:Path"
 $Env:TEST_PHP_EXECUTABLE = "$pwd\phpbin\php.exe"
