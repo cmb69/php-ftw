@@ -9,7 +9,7 @@ jobs:
       matrix:
         arch: [x64]
         ts: [ts]
-        opcache: []
+        opcache: ['']
     runs-on: windows-2019
     steps:
       - name: Checkout php-ftw
