@@ -6,4 +6,12 @@ $Env:TEST_PHP_JUNIT = "$pwd\tests-results.xml"
 
 Set-Location "tests"
 
-php "run-tests.php" "-j4" "-g" "FAIL,BORK,WARN,LEAK" "Zend\tests" "tests"
+Remove-Item "tests-to-run.txt"
+foreach ($line in Get-Content "..\dirs-to-test.txt") {
+    $ttr = Get-ChildItem -Path $line -Filter "*.phpt" -Recurse
+    foreach ($t in $ttr) {
+        Add-Content "tests-to-run.txt" ($t | Resolve-Path -Relative)
+    }
+}
+
+php "run-tests.php" "-j4" "-g" "FAIL,BORK,WARN,LEAK" "-r" "tests-to-run.txt"
