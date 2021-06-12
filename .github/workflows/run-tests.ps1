@@ -1,6 +1,6 @@
 param (
     [Parameter(Mandatory)] $arch,
-    [Parameter(Mandatory)] $opcache
+    [Parameter(Mandatory)] [ValidateSet('nocache', 'opcache')] $opcache
 )
 
 $ErrorActionPreference = "Stop"
@@ -9,7 +9,7 @@ $ini = "$pwd\phpbin\php.ini"
 Copy-Item "php.ini" $ini
 Add-Content $ini "extension_dir=$pwd\phpbin\ext"
 
-if ($opcache) {
+if ($opcache -eq "opcache") {
     New-Item "$pwd/file_cache" -ItemType "directory"
     if ($arch -eq "x64") {
         Add-Content $ini "opcache.memory_consumption=256"
