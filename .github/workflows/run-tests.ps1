@@ -5,6 +5,8 @@ param (
 
 $ErrorActionPreference = "Stop"
 
+Copy-Item "phpbin\extras\ssl\openssl.cnf" "C:\Program Files (x86)\Common Files\SSL" 
+
 $ini = "$pwd\phpbin\php.ini"
 Copy-Item "php.ini" $ini
 Add-Content $ini "extension_dir=$pwd\phpbin\ext"

@@ -7,14 +7,11 @@ jobs:
   test:
     strategy:
       matrix:
-        arch: [x64]
+        arch: [x86]
         ts: [ts]
         opcache: [nocache]
     runs-on: windows-2019
     steps:
-      - run: |
-          tree /a "C:\Program Files\Common Files"
-          exit 123
       - name: Checkout php-ftw
         uses: actions/checkout@v2
       - name: Setup MySQL
