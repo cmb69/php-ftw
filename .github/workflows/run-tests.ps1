@@ -5,7 +5,7 @@ param (
 
 $ErrorActionPreference = "Stop"
 
-Copy-Item "phpbin\extras\ssl\openssl.cnf" "C:\Program Files (x86)\Common Files\SSL" 
+$Env:OPENSSL_CONF = "$pwd\phpbin\extras\ssl\openssl.cnf"
 
 $ini = "$pwd\phpbin\php.ini"
 Copy-Item "php.ini" $ini
