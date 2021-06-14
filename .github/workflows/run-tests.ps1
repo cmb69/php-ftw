@@ -1,5 +1,6 @@
 param (
     [Parameter(Mandatory)] $arch,
+    [Parameter(Mandatory)] $ts,
     [Parameter(Mandatory)] [ValidateSet('nocache', 'opcache')] $opcache
 )
 
@@ -34,7 +35,7 @@ if ($opcache -eq "opcache") {
 
 $Env:Path = "$pwd\phpbin;$Env:Path"
 $Env:TEST_PHP_EXECUTABLE = "$pwd\phpbin\php.exe"
-$Env:TEST_PHP_JUNIT = "$pwd\tests-results.xml"
+$Env:TEST_PHP_JUNIT = "$pwd\test-$arch-$ts-$opcache.xml"
 $Env:SKIP_IO_CAPTURE_TESTS = 1
 
 $Env:OPENSSL_CONF = "$pwd\phpbin\extras\ssl\openssl.cnf"
