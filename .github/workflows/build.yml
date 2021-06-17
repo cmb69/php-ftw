@@ -32,5 +32,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: php-${{github.event.inputs.version}}-${{matrix.arch}}-${{matrix.ts}}-artifacts
+          name: artifacts
           path: artifacts
