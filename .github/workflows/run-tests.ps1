@@ -59,7 +59,6 @@ foreach ($line in Get-Content "..\dirs-to-test.txt") {
         Add-Content "tests-to-run.txt" ($t | Resolve-Path -Relative)
     }
 }
-Get-Content "tests-to-run.txt"
 
 [int] $workers = $Env:NUMBER_OF_PROCESSORS / 2 * 3
 
