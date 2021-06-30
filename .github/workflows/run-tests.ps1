@@ -61,4 +61,9 @@ foreach ($line in Get-Content "..\dirs-to-test.txt") {
 
 [int] $workers = $Env:NUMBER_OF_PROCESSORS / 2 * 3
 
-php "run-tests.php" "-j$workers" "-g" "FAIL,BORK,WARN,LEAK" "--context" "0" "-r" "tests-to-run.txt"
+$runner = "run-tests.php"
+if (-not (Test-Path $runner)) {
+    $runner = "run-test.php"
+}
+
+php $runner "-j$workers" "-g" "FAIL,BORK,WARN,LEAK" "--context" "0" "-r" "tests-to-run.txt"
