@@ -1,4 +1,5 @@
 param (
+    [Parameter(Mandatory)] $version,
     [Parameter(Mandatory)] $arch,
     [Parameter(Mandatory)] $ts,
     [Parameter(Mandatory)] [ValidateSet('nocache', 'opcache')] $opcache
@@ -61,9 +62,19 @@ foreach ($line in Get-Content "..\dirs-to-test.txt") {
 
 [int] $workers = $Env:NUMBER_OF_PROCESSORS / 2 * 3
 
-$runner = "run-tests.php"
-if (-not (Test-Path $runner)) {
-    $runner = "run-test.php"
+switch ($version.Substring(0, 3)) {
+    "7.3" {
+        $runner = "run-test.php"
+        $workers = ""
+    }
+    "7.4" {
+        $runner = "run-test.php"
+        $workers = "-j$workers"
+    }
+    default {
+        $runner = "run-tests.php"
+        $workers = "-j$workers"
+    }
 }
 
-php $runner "-j$workers" "-g" "FAIL,BORK,WARN,LEAK" "--context" "0" "-r" "tests-to-run.txt"
+php $runner $workers "-g" "FAIL,BORK,WARN,LEAK" "-r" "tests-to-run.txt"

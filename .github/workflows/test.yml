@@ -26,7 +26,7 @@ jobs:
       - name: Fetch PHP
         run: powershell .github/workflows/fetch-php.ps1 -version ${{github.event.inputs.version}} -arch ${{matrix.arch}} -ts ${{matrix.ts}}
       - name: Run tests
-        run: powershell .github/workflows/run-tests.ps1 -arch ${{matrix.arch}} -ts ${{matrix.ts}} -opcache ${{matrix.opcache}}
+        run: powershell .github/workflows/run-tests.ps1 -version ${{github.event.inputs.version}} -arch ${{matrix.arch}} -ts ${{matrix.ts}} -opcache ${{matrix.opcache}}
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
