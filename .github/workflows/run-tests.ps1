@@ -60,7 +60,7 @@ foreach ($line in Get-Content "..\dirs-to-test.txt") {
     }
 }
 
-[int] $workers = $Env:NUMBER_OF_PROCESSORS / 2 * 3
+$workers = $Env:NUMBER_OF_PROCESSORS / 2 * 3
 
 switch ($version.Substring(0, 3)) {
     "7.3" {
