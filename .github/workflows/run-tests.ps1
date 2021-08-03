@@ -77,4 +77,4 @@ switch ($version.Substring(0, 3)) {
     }
 }
 
-php $runner $workers "-g" "FAIL,BORK,WARN,LEAK" "-r" "tests-to-run.txt"
+php $runner "-g" "FAIL,BORK,WARN,LEAK" "-r" "tests-to-run.txt"
