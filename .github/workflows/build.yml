@@ -21,7 +21,7 @@ jobs:
       - name: Checkout php-sdk
         uses: actions/checkout@v2
         with:
-          repository: 'cmb69/php-sdk-binary-tools'
+          repository: 'php/php-sdk-binary-tools'
           path: 'php-sdk'
       - name: Install OCI
         run: powershell .github/workflows/install-oci.ps1 -arch ${{matrix.arch}}
