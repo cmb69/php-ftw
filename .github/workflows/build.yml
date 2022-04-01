@@ -22,6 +22,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: 'php/php-sdk-binary-tools'
+          ref: 'cc7c11adad5f962f571130cad61f0de2cc071ad7'
           path: 'php-sdk'
       - name: Install OCI
         run: powershell .github/workflows/install-oci.ps1 -arch ${{matrix.arch}}
