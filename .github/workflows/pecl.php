@@ -18,6 +18,13 @@ if (!array_key_exists($extension, $ini)) {
 }
 echo "::set-output name=config::{$ini[$extension]['config']}\n";
 
+if (array_key_exists("libs", $ini[$extension])) {
+    $libs = $ini[$extension]["libs"];
+} else {
+    $libs = "";
+}
+echo "::set-output name=libs::{$libs}\n";
+
 $sxe = simplexml_load_file("./package.xml");
 $sxe->registerXPathNamespace("p", "http://pear.php.net/dtd/package-2.0");
 $docs = array_map(
@@ -26,7 +33,7 @@ $docs = array_map(
     },
     $sxe->xpath("//p:file[@role='doc']")
 );
-$docs = implode(" + ", $docs);
+$docs = implode(" ", $docs);
 echo "::set-output name=docs::{$docs}\n";
 
 $builddir = "";
