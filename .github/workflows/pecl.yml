@@ -58,7 +58,7 @@ jobs:
           xcopy ${{steps.virtuals.outputs.builddir}}\*.pdb ..\install\*
           cd ..\install
           if exist vc140.pdb del vc140.pdb
-          7z a -sdel ${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip *
+          7z a -sdel php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip *
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
