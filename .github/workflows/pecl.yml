@@ -1,0 +1,65 @@
+name: Build PECL Extension
+on:
+  workflow_dispatch:
+    inputs:
+      extension:
+        description: 'PECL extension to build'
+        required: true
+      version:
+        description: 'PECL extension version to build'
+        required: true
+defaults:
+  run:
+    shell: cmd
+jobs:
+  build:
+    name: ${{github.event.inputs.extension}}-${{github.event.inputs.version}} (${{matrix.version}}, ${{matrix.arch}}, ${{matrix.ts}})
+    strategy:
+      matrix:
+        version: ['8.1', '8.0', '7.4']
+        arch: [x64, x86]
+        ts: [nts, ts]
+    runs-on: windows-2019
+    steps:
+      - name: Checkout php-ftw
+        uses: actions/checkout@v2
+      - name: Fetch package
+        run: curl -OLs https://pecl.php.net/get/${{github.event.inputs.extension}}-${{github.event.inputs.version}}.tgz && 7z x ${{github.event.inputs.extension}}-${{github.event.inputs.version}}.tgz && 7z x ${{github.event.inputs.extension}}-${{github.event.inputs.version}}.tar
+      - name: Compute virtual inputs
+        id: virtuals
+        run: php .github\workflows\pecl.php ${{matrix.version}} ${{matrix.arch}} ${{matrix.ts}} ${{github.event.inputs.extension}}
+      - name: Setup PHP
+        id: setup-php
+        uses: cmb69/setup-php-sdk@v0.5
+        with:
+          version: ${{matrix.version}}
+          arch: ${{matrix.arch}}
+          ts: ${{matrix.ts}}
+      - name: Enable Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: ${{matrix.arch}}
+          toolset: ${{steps.setup-php.outputs.toolset}}
+      - name: phpize
+        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && phpize
+      - name: configure
+        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && configure ${{steps.virtuals.outputs.config}} --enable-debug-pack
+      - name: make
+        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && nmake
+      - name: Package
+        run: |
+          cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}}
+          xcopy CREDITS ..\install\*
+          xcopy COPYING ..\install\*
+          xcopy COPYRIGHT ..\install\*
+          xcopy LICENSE ..\install\*
+          xcopy ${{steps.virtuals.outputs.builddir}}\*.dll ..\install\*
+          xcopy ${{steps.virtuals.outputs.builddir}}\*.pdb ..\install\*
+          cd ..\install
+          if exist vc140.pdb del vc140.pdb
+          7z a -sdel ${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip *
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: artifacts
+          path: install
