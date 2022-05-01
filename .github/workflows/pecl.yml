@@ -49,10 +49,11 @@ jobs:
       - name: Package
         run: |
           cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}}
+          md ..\install
           xcopy CREDITS ..\install\*
           xcopy COPYING ..\install\*
           xcopy COPYRIGHT ..\install\*
-          xcopy LICENSE ..\install\*
+          copy ${{steps.virtuals.outputs.docs}} ..\install
           xcopy ${{steps.virtuals.outputs.builddir}}\*.dll ..\install\*
           xcopy ${{steps.virtuals.outputs.builddir}}\*.pdb ..\install\*
           cd ..\install

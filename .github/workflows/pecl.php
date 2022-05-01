@@ -18,6 +18,17 @@ if (!array_key_exists($extension, $ini)) {
 }
 echo "::set-output name=config::{$ini[$extension]['config']}\n";
 
+$sxe = simplexml_load_file("./package.xml");
+$sxe->registerXPathNamespace("p", "http://pear.php.net/dtd/package-2.0");
+$docs = array_map(
+    function ($sxe) {
+        return (string) $sxe["name"];
+    },
+    $sxe->xpath("//p:file[@role='doc']")
+);
+$docs = implode(" + ", $docs);
+echo "::set-output name=docs::{$docs}\n";
+
 $builddir = "";
 if ($arch === "x64") {
     $builddir .= "x64\\";
