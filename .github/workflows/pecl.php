@@ -29,7 +29,7 @@ $sxe = simplexml_load_file("./package.xml");
 $sxe->registerXPathNamespace("p", "http://pear.php.net/dtd/package-2.0");
 $docs = array_map(
     function ($sxe) {
-        return (string) $sxe["name"];
+        return str_replace("/", "\\", (string) $sxe["name"]);
     },
     $sxe->xpath("//p:file[@role='doc']")
 );

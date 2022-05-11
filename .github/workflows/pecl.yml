@@ -54,7 +54,7 @@ jobs:
           xcopy COPYING ..\install\*
           xcopy COPYRIGHT ..\install\*
           xcopy LICENSE ..\install\*
-          for %%i in (${{steps.virtuals.outputs.docs}}) do xcopy %%i ..\install
+          for %%i in (${{steps.virtuals.outputs.docs}}) do echo f | xcopy %%i ..\install\%%i
           xcopy ${{steps.virtuals.outputs.builddir}}\*.dll ..\install\*
           for %%i in (..\install\*.dll) do xcopy ${{steps.virtuals.outputs.builddir}}\%%~ni.pdb ..\install\*
           cd ..\install
