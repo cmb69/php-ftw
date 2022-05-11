@@ -42,11 +42,11 @@ jobs:
           arch: ${{matrix.arch}}
           toolset: ${{steps.setup-php.outputs.toolset}}
       - name: phpize
-        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && phpize
+        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && phpize | tee phpize-php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.txt
       - name: configure
-        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && configure --with-php-build=..\..\deps ${{steps.virtuals.outputs.config}} --enable-debug-pack
+        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && configure --with-php-build=..\..\deps ${{steps.virtuals.outputs.config}} --enable-debug-pack | tee configure-php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.txt
       - name: make
-        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && nmake
+        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && nmake | tee make-php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.txt
       - name: Package
         run: |
           cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}}
@@ -59,6 +59,10 @@ jobs:
           for %%i in (..\install\*.dll) do xcopy ${{steps.virtuals.outputs.builddir}}\%%~ni.pdb ..\install\*
           cd ..\install
           if exist vc140.pdb del vc140.pdb
+          7z a -sdel php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip *
+          cd ..\${{github.event.inputs.extension}}-${{github.event.inputs.version}}
+          xcopy *-php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.txt ..\install\logs\*
+          cd ..\install\logs
           7z a -sdel php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip *
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
