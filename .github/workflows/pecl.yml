@@ -25,7 +25,7 @@ jobs:
       - name: Checkout php-ftw
         uses: actions/checkout@v3
       - name: Fetch package
-        run: curl -OLs https://pecl.php.net/get/${{github.event.inputs.extension}}-${{github.event.inputs.version}}.tgz && 7z x ${{github.event.inputs.extension}}-${{github.event.inputs.version}}.tgz && 7z x ${{github.event.inputs.extension}}-${{github.event.inputs.version}}.tar
+        run: curl -OLs https://pecl.php.net/get/${{github.event.inputs.extension}}-${{github.event.inputs.version}}.tgz && 7z x ${{github.event.inputs.extension}}-${{github.event.inputs.version}}.tgz && 7z x -y ${{github.event.inputs.extension}}-${{github.event.inputs.version}}.tar
       - name: Compute virtual inputs
         id: virtuals
         run: php .github\workflows\pecl.php ${{matrix.version}} ${{matrix.arch}} ${{matrix.ts}} ${{github.event.inputs.extension}}
