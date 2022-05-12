@@ -21,7 +21,7 @@ echo "::set-output name=config::{$ini[$extension]['config']}\n";
 if (array_key_exists("libs", $ini[$extension])) {
     $libs = $ini[$extension]["libs"];
 } else {
-    $libs = "";
+    $libs = "''";
 }
 echo "::set-output name=libs::{$libs}\n";
 
