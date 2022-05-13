@@ -44,7 +44,7 @@ jobs:
       - name: phpize
         run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && phpize | tee phpize-php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.txt
       - name: configure
-        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && configure --with-php-build=..\..\deps ${{steps.virtuals.outputs.config}} --enable-debug-pack | tee configure-php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.txt
+        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && configure --with-php-build=..\..\deps ${{steps.virtuals.outputs.config}} --with-mp=disable --enable-debug-pack | tee configure-php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.txt
       - name: make
         run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && nmake | tee make-php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.txt
       - name: Package
