@@ -41,6 +41,7 @@ jobs:
         with:
           arch: ${{matrix.arch}}
           toolset: ${{steps.setup-php.outputs.toolset}}
+          sdk: ${{steps.setup-php.outputs.winsdk}}
       - name: phpize
         run: |
           cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}}
