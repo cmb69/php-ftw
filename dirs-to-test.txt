@@ -20,6 +20,7 @@ ext\soap\tests
 ext\spl\tests
 ext\sqlite3\tests
 ext\standard\tests
+ext\sysvshm\tests
 ext\xmlreader\tests
 ext\xmlwriter\tests
 ext\xml\tests
