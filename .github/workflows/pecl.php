@@ -40,7 +40,7 @@ if (array_key_exists("exts", $ini[$extension])) {
 }
 
 $sxe = simplexml_load_file("./package.xml");
-$sxe->registerXPathNamespace("p", "http://pear.php.net/dtd/package-2.0");
+$sxe->registerXPathNamespace("p", $sxe->getNamespaces()[""]);
 $docs = array_map(
     function ($sxe) {
         return str_replace("/", "\\", (string) $sxe["name"]);
