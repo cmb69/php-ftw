@@ -26,8 +26,8 @@ if (array_key_exists("libs", $ini[$extension])) {
 }
 echo "::set-output name=libs::{$libs}\n";
 
-$lines = [];
 if (array_key_exists("exts", $ini[$extension])) {
+    $lines = [];
     $exts = $ini[$extension]["exts"];
     foreach (explode(",", $exts) as $ext) {
         if (array_key_exists($ext, $ini)) {
@@ -36,8 +36,8 @@ if (array_key_exists("exts", $ini[$extension])) {
             throw new Exception("Unsupported dependency extension: $extension");
         }
     }
+    file_put_contents("./extensions.csv", $lines);
 }
-file_put_contents("./extensions.csv", $lines);
 
 $sxe = simplexml_load_file("./package.xml");
 $sxe->registerXPathNamespace("p", "http://pear.php.net/dtd/package-2.0");

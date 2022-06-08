@@ -44,7 +44,7 @@ jobs:
           toolset: ${{steps.setup-php.outputs.toolset}}
           sdk: ${{steps.setup-php.outputs.winsdk}}
       - name: Build and install dependency extensions
-        run: for /f "tokens=1,2*" %%i in (extensions.csv) do call .github\workflows\install-pecl-dep %%i %%j ${{steps.setup-php.outputs.prefix}}
+        run: if exist extensions.csv for /f "tokens=1,2*" %%i in (extensions.csv) do call .github\workflows\install-pecl-dep %%i %%j ${{steps.setup-php.outputs.prefix}}
       - name: phpize
         run: |
           cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}}
