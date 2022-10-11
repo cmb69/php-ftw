@@ -84,7 +84,7 @@ jobs:
           cd ..\install\logs
           7z a -sdel php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip *
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: artifacts
           path: install

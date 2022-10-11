@@ -30,7 +30,7 @@ jobs:
       - name: Build php
         run: powershell .github/workflows/build.ps1 -version ${{github.event.inputs.version}} -arch ${{matrix.arch}} -ts ${{matrix.ts}}
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: artifacts
           path: artifacts
