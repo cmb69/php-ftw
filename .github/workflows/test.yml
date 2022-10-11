@@ -18,7 +18,7 @@ jobs:
     runs-on: windows-2019
     steps:
       - name: Checkout php-ftw
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup MySQL
         uses: ankane/setup-mysql@v1
         with:

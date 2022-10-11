@@ -17,9 +17,9 @@ jobs:
     runs-on: windows-2019
     steps:
       - name: Checkout php-ftw
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Checkout php-sdk
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: 'php/php-sdk-binary-tools'
           path: 'php-sdk'
