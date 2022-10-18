@@ -55,7 +55,7 @@ jobs:
       - name: configure
         run: |
           cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}}
-          configure --with-php-build=..\..\deps ${{steps.virtuals.outputs.config}} --with-mp=disable --enable-debug-pack --with-extra-includes=D:\a\php-ftw\php-ftw\php-dev\include\ext\date\lib > configure-php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.txt 2>&1
+          configure --with-php-build=..\..\deps ${{steps.virtuals.outputs.config}} --with-mp=disable --enable-debug-pack > configure-php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.txt 2>&1
           set error=%errorlevel%
           type configure-php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.txt
           exit /b %error%
