@@ -11,20 +11,20 @@ $versions = [
 if (!array_key_exists($version, $versions)) {
     throw new Exception("Unsupported version: $version");
 }
-echo "::set-output name=vs::{$versions[$version]}\n";
+file_put_contents($_ENV["GITHUB_ENV"], "vs={$versions[$version]}\n", FILE_APPEND);
 
 $ini = parse_ini_file(__DIR__ . "/pecl.ini", true, INI_SCANNER_RAW);
 if (!array_key_exists($extension, $ini)) {
     throw new Exception("Unsupported extension: $extension");
 }
-echo "::set-output name=config::{$ini[$extension]['config']}\n";
+file_put_contents($_ENV["GITHUB_ENV"], "config={$ini[$extension]['config']}\n", FILE_APPEND);
 
 if (array_key_exists("libs", $ini[$extension])) {
     $libs = $ini[$extension]["libs"];
 } else {
     $libs = "''";
 }
-echo "::set-output name=libs::{$libs}\n";
+file_put_contents($_ENV["GITHUB_ENV"], "libs={$libs}\n", FILE_APPEND);
 
 if (array_key_exists("exts", $ini[$extension])) {
     $lines = [];
@@ -48,7 +48,7 @@ $docs = array_map(
     $sxe->xpath("//p:file[@role='doc']")
 );
 $docs = implode(" ", $docs);
-echo "::set-output name=docs::{$docs}\n";
+file_put_contents($_ENV["GITHUB_ENV"], "docs={$docs}\n", FILE_APPEND);
 
 $builddir = "";
 if ($arch === "x64") {
@@ -58,4 +58,4 @@ $builddir .= "Release";
 if ($ts === "ts") {
     $builddir .= "_TS";
 }
-echo "::set-output name=builddir::{$builddir}\n";
+file_put_contents($_ENV["GITHUB_ENV"], "builddir={$builddir}\n", FILE_APPEND);
