@@ -31,7 +31,7 @@ jobs:
         run: php .github\workflows\pecl.php ${{matrix.version}} ${{matrix.arch}} ${{matrix.ts}} ${{github.event.inputs.extension}}
       - name: Setup PHP
         id: setup-php
-        uses: cmb69/setup-php-sdk@v0.5
+        uses: cmb69/setup-php-sdk@v0.7
         with:
           version: ${{matrix.version}}
           arch: ${{matrix.arch}}
