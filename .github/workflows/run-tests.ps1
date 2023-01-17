@@ -66,15 +66,23 @@ switch ($version.Substring(0, 3)) {
     "7.3" {
         $runner = "run-test.php"
         $workers = ""
+        $progress = ""
     }
     "7.4" {
         $runner = "run-test.php"
         $workers = "-j$workers"
+        $progress = ""
+    }
+    "8.2" {
+        $runner = "run-tests.php"
+        $workers = "-j$workers"
+        $progress = "--no-progress"
     }
     default {
         $runner = "run-tests.php"
         $workers = "-j$workers"
+        $progress = ""
     }
 }
 
-php $runner "-g" "FAIL,BORK,WARN,LEAK" "-r" "tests-to-run.txt"
+php $runner $progress "-g" "FAIL,BORK,WARN,LEAK" "-r" "tests-to-run.txt"
