@@ -44,7 +44,7 @@ jobs:
           toolset: ${{steps.setup-php.outputs.toolset}}
           sdk: ${{steps.setup-php.outputs.winsdk}}
       - name: Install PECL dependecy libs
-        run: if exists pecl_libs.csv for /f "tokens=1*" %%i in (pecl_libs.csv) do curl -OLs https://windows.php.net/downloads/pecl/deps/%%i-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip && 7z x -o..\deps %%i-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip
+        run: if exist pecl_libs.csv for /f "tokens=1*" %%i in (pecl_libs.csv) do curl -OLs https://windows.php.net/downloads/pecl/deps/%%i-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip && 7z x -o..\deps %%i-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip
       - name: Build and install dependency extensions
         run: if exist extensions.csv for /f "tokens=1,2*" %%i in (extensions.csv) do call .github\workflows\install-pecl-dep %%i %%j ${{steps.setup-php.outputs.prefix}}
       - name: phpize
