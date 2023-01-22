@@ -26,6 +26,14 @@ if (array_key_exists("libs", $ini[$extension])) {
 }
 file_put_contents(getenv("GITHUB_OUTPUT"), "libs={$libs}\n", FILE_APPEND);
 
+// work around missing possibility to install PECL dependencies
+if (array_key_exists("pecl_libs", $ini[$extension])) {
+    $libs = $ini[$extension]["pecl_libs"];
+} else {
+    $libs = "''";
+}
+file_put_contents("./pecl_libs.csv", explode("\n", $libs));
+
 if (array_key_exists("exts", $ini[$extension])) {
     $lines = [];
     $exts = $ini[$extension]["exts"];
