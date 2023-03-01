@@ -45,6 +45,8 @@ jobs:
           sdk: ${{steps.setup-php.outputs.winsdk}}
       - name: Install PECL dependecy libs
         run: if exist pecl_libs.csv for /f "tokens=1*" %%i in (pecl_libs.csv) do curl -OLs https://windows.php.net/downloads/pecl/deps/%%i-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip && 7z x -o..\deps %%i-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip
+      - name: Rename PECL dependency lib LICENSE files
+        run: if exist pecl_libs.csv for /f "delims=- tokens=1" %%i in (pecl_libs.csv) do rename ..\deps\LICENSE ..\deps\LICENSE.%%i && dir ..\deps
       - name: Build and install dependency extensions
         run: if exist extensions.csv for /f "tokens=1,2*" %%i in (extensions.csv) do call .github\workflows\install-pecl-dep %%i %%j ${{steps.setup-php.outputs.prefix}}
       - name: phpize
@@ -72,6 +74,7 @@ jobs:
         run: |
           cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}}
           md ..\install
+          xcopy ..\..\deps\LICENSE* ..\install\*
           xcopy COPYING ..\install\*
           xcopy COPYRIGHT ..\install\*
           xcopy LICENSE ..\install\*
