@@ -47,6 +47,11 @@ if (array_key_exists("exts", $ini[$extension])) {
     file_put_contents("./extensions.csv", $lines);
 }
 
+// actual extension in subfolder
+if (array_key_exists("subfolder", $ini[$extension])) {
+    file_put_contents(getenv("GITHUB_OUTPUT"), "subfolder={$ini[$extension]['subfolder']}\n", FILE_APPEND);
+}
+
 $sxe = simplexml_load_file("./package.xml");
 $sxe->registerXPathNamespace("p", $sxe->getNamespaces()[""]);
 $docs = array_map(
