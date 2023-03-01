@@ -31,7 +31,7 @@ jobs:
         run: php .github\workflows\pecl.php ${{matrix.version}} ${{matrix.arch}} ${{matrix.ts}} ${{github.event.inputs.extension}}
       - name: Normalize package folder structure
         if: ${{steps.virtuals.outputs.subfolder != ''}}
-        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && xcopy ${{steps.virtuals.outputs.subfolder}\** * /s
+        run: cd ${{github.event.inputs.extension}}-${{github.event.inputs.version}} && xcopy ${{steps.virtuals.outputs.subfolder}}\** * /s
       - name: Setup PHP
         id: setup-php
         uses: cmb69/setup-php-sdk@v0.7
