@@ -7,6 +7,7 @@ $versions = [
     "8.0" => "vs16",
     "8.1" => "vs16",
     "8.2" => "vs16",
+    "8.3" => "vs16",
 ];
 if (!array_key_exists($version, $versions)) {
     throw new Exception("Unsupported version: $version");
