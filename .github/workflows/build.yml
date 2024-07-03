@@ -24,7 +24,12 @@ jobs:
           repository: 'php/php-sdk-binary-tools'
           path: 'php-sdk'
       - name: Patch SDK
-        run: copy /y patch\Package.php php-sdk\lib\php\libsdk\SDK\Build\Dependency\Package.php
+        run: |
+          copy /y patch\Package.php php-sdk\lib\php\libsdk\SDK\Build\Dependency\Package.php
+          copy /y php-sdk\pgo\tpl\php\php-8.3-pgo-nts.ini php-sdk\pgo\tpl\php\php-8.4-pgo-nts.ini
+          copy /y php-sdk\pgo\tpl\php\php-8.3-pgo-nts-cache.ini php-sdk\pgo\tpl\php\php-8.4-pgo-nts-cache.ini
+          copy /y php-sdk\pgo\tpl\php\php-8.3-pgo-ts.ini php-sdk\pgo\tpl\php\php-8.4-pgo-ts.ini
+          copy /y php-sdk\pgo\tpl\php\php-8.3-pgo-ts-cache.ini php-sdk\pgo\tpl\php\php-8.4-pgo-ts-cache.ini
       - name: Install OCI
         run: powershell .github/workflows/install-oci.ps1 -arch ${{matrix.arch}}
       - name: Fetch php-src
