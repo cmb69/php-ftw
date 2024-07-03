@@ -13,7 +13,7 @@ $versions = @{
     "8.1" = "vs16"
     "8.2" = "vs16"
     "8.3" = "vs16"
-    "8.4" = "vs16"
+    "8.4" = "vs17"
 }
 $vs = $versions.($version.Substring(0, 3))
 if (-not $vs) {
