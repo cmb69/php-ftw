@@ -14,7 +14,7 @@ jobs:
       matrix:
         arch: [x64, x86]
         ts: [nts, ts]
-    runs-on: windows-2022
+    runs-on: windows-2019
     steps:
       - name: Checkout php-ftw
         uses: actions/checkout@v3
