@@ -23,6 +23,8 @@ jobs:
         with:
           repository: 'php/php-sdk-binary-tools'
           path: 'php-sdk'
+      - name: Patch SDK
+        run: copy /y patch\Package.php php-sdk\lib\php\libsdk\SDK\Build\Dependency\Package.php
       - name: Install OCI
         run: powershell .github/workflows/install-oci.ps1 -arch ${{matrix.arch}}
       - name: Fetch php-src
