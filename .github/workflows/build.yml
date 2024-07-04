@@ -32,5 +32,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: artifacts
-          path: artifacts
+          name: artifacts-${{matrix.ts}}-${{matrix.arch}}
+          path: artifacts-${{matrix.ts}}-${{matrix.arch}}

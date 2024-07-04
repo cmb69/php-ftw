@@ -42,4 +42,4 @@ if (-not $?) {
 }
 
 $artifacts = if ($ts -eq "ts") {"..\obj\Release_TS\php-*.zip"} else {"..\obj\Release\php-*.zip"}
-xcopy $artifacts "..\..\..\..\artifacts\*"
+xcopy $artifacts "..\..\..\..\artifacts-$ts-$arch\*"
