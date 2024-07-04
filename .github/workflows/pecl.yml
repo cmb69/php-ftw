@@ -23,7 +23,7 @@ jobs:
     runs-on: windows-2019
     steps:
       - name: Checkout php-ftw
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Fetch package
         run: curl -OLs https://pecl.php.net/get/${{github.event.inputs.extension}}-${{github.event.inputs.version}}.tgz && 7z x ${{github.event.inputs.extension}}-${{github.event.inputs.version}}.tgz && 7z x -y ${{github.event.inputs.extension}}-${{github.event.inputs.version}}.tar
       - name: Compute virtual inputs
@@ -92,7 +92,7 @@ jobs:
           cd ..\install\logs
           7z a -sdel php_${{github.event.inputs.extension}}-${{github.event.inputs.version}}-${{matrix.version}}-${{matrix.ts}}-${{steps.virtuals.outputs.vs}}-${{matrix.arch}}.zip *
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: artifacts
           path: install

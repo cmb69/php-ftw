@@ -17,9 +17,9 @@ jobs:
     runs-on: windows-2019
     steps:
       - name: Checkout php-ftw
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Checkout php-sdk
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: 'php/php-sdk-binary-tools'
           path: 'php-sdk'
@@ -30,7 +30,7 @@ jobs:
       - name: Build php
         run: powershell .github/workflows/build.ps1 -version ${{github.event.inputs.version}} -arch ${{matrix.arch}} -ts ${{matrix.ts}}
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: artifacts
           path: artifacts

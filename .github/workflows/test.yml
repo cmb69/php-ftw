@@ -18,7 +18,7 @@ jobs:
     runs-on: windows-2019
     steps:
       - name: Checkout php-ftw
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup MySQL
         uses: ankane/setup-mysql@v1
         with:
@@ -28,7 +28,7 @@ jobs:
       - name: Run tests
         run: powershell .github/workflows/run-tests.ps1 -version ${{github.event.inputs.version}} -arch ${{matrix.arch}} -ts ${{matrix.ts}} -opcache ${{matrix.opcache}}
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-results
           path: test-${{matrix.arch}}-${{matrix.ts}}-${{matrix.opcache}}.xml
