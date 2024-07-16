@@ -26,7 +26,7 @@ jobs:
       - name: Install OCI
         run: powershell .github/workflows/install-oci.ps1 -arch ${{matrix.arch}}
       - name: Fetch php-src
-        run: powershell .github/workflows/fetch-php-src.ps1 -version ${{github.event.inputs.version}} -arch ${{matrix.arch}}
+        run: powershell .github/workflows/fetch-php-src.ps1 -version ${{github.event.inputs.version}} -arch ${{matrix.arch}} -ts ${{matrix.ts}}
       - name: Build php
         run: powershell .github/workflows/build.ps1 -version ${{github.event.inputs.version}} -arch ${{matrix.arch}} -ts ${{matrix.ts}}
       - name: Upload artifacts
