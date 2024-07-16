@@ -1,6 +1,7 @@
 param (
     [Parameter(Mandatory)] $version,
-    [Parameter(Mandatory)] $arch
+    [Parameter(Mandatory)] $arch,
+    [Parameter(Mandatory)] $ts
 )
 
 $ErrorActionPreference = "Stop"
@@ -12,5 +13,5 @@ if ($version.Contains(".")) {
 }
 7z "x" "php-$version.zip"
 Move-Item "php-src-php-$version" "php-$version-src"
-7z "a" "artifacts\php-$version-src.zip" "php-$version-src"
+7z "a" "artifacts-$ts-$arch\php-$version-src.zip" "php-$version-src"
 Move-Item "php-$version-src" "php/vs16/$arch/php-$version"
