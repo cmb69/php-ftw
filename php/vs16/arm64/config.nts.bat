@@ -1,0 +1,1 @@
+cscript /nologo configure.js "--disable-all" "--enable-cli" "--enable-debug-pack" "--disable-zts" "--enable-object-out-dir=../obj/" "--without-analyzer" %*

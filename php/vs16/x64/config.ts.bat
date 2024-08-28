@@ -1,1 +1,1 @@
-cscript /nologo configure.js "--disable-all" "--enable-cli" "--enable-debug-pack" "--enable-object-out-dir=../obj/" "--without-analyzer" %*
+cscript /nologo configure.js "--enable-snapshot-build" "--enable-debug-pack" "--enable-object-out-dir=../obj/" "--enable-com-dotnet=shared" "--without-analyzer" "--enable-pgi" %* 
