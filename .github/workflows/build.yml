@@ -12,7 +12,7 @@ jobs:
   build:
     strategy:
       matrix:
-        arch: [x64, x86]
+        arch: [arm64]
         ts: [nts, ts]
     runs-on: windows-2022
     steps:
@@ -24,8 +24,8 @@ jobs:
           repository: 'php/php-sdk-binary-tools'
           ref: 'php-sdk-2.3.0'
           path: 'php-sdk'
-      - name: Install OCI
-        run: powershell .github/workflows/install-oci.ps1 -arch ${{matrix.arch}}
+#      - name: Install OCI
+#        run: powershell .github/workflows/install-oci.ps1 -arch ${{matrix.arch}}
       - name: Fetch php-src
         run: powershell .github/workflows/fetch-php-src.ps1 -version ${{github.event.inputs.version}} -arch ${{matrix.arch}} -ts ${{matrix.ts}}
       - name: Build php
