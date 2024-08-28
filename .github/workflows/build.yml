@@ -24,6 +24,8 @@ jobs:
           repository: 'php/php-sdk-binary-tools'
           ref: 'php-sdk-2.3.0'
           path: 'php-sdk'
+      - name: Add starter script
+        run: copy phpsdk-vs17-arm64.bat php-sdk
 #      - name: Install OCI
 #        run: powershell .github/workflows/install-oci.ps1 -arch ${{matrix.arch}}
       - name: Fetch php-src
