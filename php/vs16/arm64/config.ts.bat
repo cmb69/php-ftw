@@ -1,1 +1,1 @@
-cscript /nologo configure.js "--enable-snapshot-build" "--disable-opcache" "--enable-debug-pack" "--enable-object-out-dir=../obj/" "--without-analyzer" %*
+cscript /nologo configure.js "--enable-snapshot-build" "--disable-opcache-jit" "--enable-debug-pack" "--enable-object-out-dir=../obj/" "--without-analyzer" %*
