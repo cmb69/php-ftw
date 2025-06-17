@@ -36,7 +36,7 @@ Add-Content $task "if errorlevel 1 exit 10"
 Add-Content $task "nmake && nmake snap 2>&1"
 Add-Content $task "if errorlevel 1 exit 11"
 
-& "..\..\..\..\php-sdk\phpsdk-starter.bat" -c vs16 -a x64 -s 14.29 -t $task
+& "..\..\..\..\php-sdk\phpsdk-starter.bat" -c vs16 -a $arch -s 14.29 -t $task
 if (-not $?) {
     throw "build failed with errorlevel $LastExitCode"
 }
