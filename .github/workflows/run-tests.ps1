@@ -90,6 +90,11 @@ switch ($version.Substring(0, 3)) {
         $workers = "-j$workers"
         $progress = "--no-progress"
     }
+    "8.5" {
+        $runner = "run-tests.php"
+        $workers = "-j$workers"
+        $progress = "--no-progress"
+    }
     default {
         $runner = "run-tests.php"
         $workers = "-j$workers"
