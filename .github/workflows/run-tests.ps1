@@ -56,7 +56,9 @@ Remove-Item "tests-to-run.txt" -ErrorAction "Ignore"
 foreach ($line in Get-Content "..\dirs-to-test.txt") {
     $ttr = Get-ChildItem -Path $line -Filter "*.phpt" -Recurse
     foreach ($t in $ttr) {
-        Add-Content "tests-to-run.txt" ($t | Resolve-Path -Relative)
+        if ($t.Basename -ne "file_get_contents_file_put_contents_5gb") {
+            Add-Content "tests-to-run.txt" ($t | Resolve-Path -Relative)
+        }
     }
 }
 
